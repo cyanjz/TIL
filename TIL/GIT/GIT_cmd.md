@@ -39,10 +39,14 @@ git push {repo_name} {branch_name} # Push local repo to remote repo. Cannot merg
 git clone {repo_url} # Clone remote repo. Remote url is automatically updated.
 ```
 
-3. .gitignore
-   1. git이 추적하지 않을 파일을 지정.
-      1. folder_name/
-      2. file_name
-   2. 단 한번이라도 commit이 된 파일은 .gitignore로 무시할 수 없음.
-   3. repository의 구조/파일을 미리 정하고 개발을 시작.
-   4. gitignore 폴더를 만드는 것도 하나의 방법.
+3. Revert / Reset 문법
+```bash
+# git revert
+git revert {commit_id1} {commit_id2} ...
+git revert --no-edit {commit_id}
+git revert --no-commit {commit_id}
+# git reset, --hard, --soft, --mixed
+git reset [option] {commit_id}
+
+```
+4. 
