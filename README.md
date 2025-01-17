@@ -1,3 +1,3 @@
 # cyanjz's TIL(Today I Learned)
-1. Review everyday
-2. 
+1. TIL : To review what i leaned today.
+2. Coding practice : To upload algorithm probs.
