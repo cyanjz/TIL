@@ -1,4 +1,5 @@
 # cyanjz's TIL(Today I Learned)
+### 내일 후회하지 않기 위해 오늘 후회하지 않기!
 ## Folder info.
 1. TIL : To review what i learned today.
    1. YYYYMMDD_{simple tag in Pacalcase}.txt
