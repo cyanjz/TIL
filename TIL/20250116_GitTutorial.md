@@ -57,7 +57,7 @@ git config --global user.name {user_name}
 git restore --staged {file_name} # Undo modification from staging area
 git rm --cached # Remove new files from stating area
 ```
-4. Remote repository 문법법
+4. Remote repository 문법
 ```bash
 # Control remote repos
 git remote add {repo_name} {repo_url} # Add new remote repo
