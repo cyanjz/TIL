@@ -13,6 +13,7 @@
    6. clear / ctrl + l : clear cmd history
    7. pwd : print current working directory
    8. ctrl + i : paste
+   9. cat + <file name> : Print file contents
 
 ## Tortoise svn - 중앙 버전 관리 시스템템
 - 서버 다운이나 여러 문제에 대응하기 어려움.
@@ -67,6 +68,13 @@ git remote -v # Checkout remote repo info.
 git pull {repo_name} {branch_name} # Fetch & merge from remote repo. Cannot pull branches with unrelated histories.
 git push {repo_name} {branch_name} # Push local repo to remote repo. Cannot merge barnches with unrelated histories. (Cannot merge in github)
 # Clone remote repo
+git clone {repo_url} # Clone remote repo. Remote url is automatically updated.
 ```
 
-5. 
+5. .gitignore
+   1. git이 추적하지 않을 파일을 지정.
+      1. folder_name/
+      2. file_name
+   2. 단 한번이라도 commit이 된 파일은 .gitignore로 무시할 수 없음.
+   3. repository의 구조/파일을 미리 정하고 개발을 시작.
+   4. gitignore 폴더를 만드는 것도 하나의 방법.
