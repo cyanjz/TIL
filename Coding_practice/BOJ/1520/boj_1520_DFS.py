@@ -19,10 +19,6 @@ def DFS(r, c):
         DP[r][c] = x
         return DP[r][c]
 
-
-                        
-
-
 # def pm(wm):
 #     for row in wm:
 #         print(' '.join([f'{x}' for x in row]))
