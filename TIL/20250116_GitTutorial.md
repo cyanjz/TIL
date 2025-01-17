@@ -56,4 +56,17 @@ git config --global user.name {user_name}
 git restore --staged {file_name} # Undo modification from staging area
 git rm --cached # Remove new files from stating area
 ```
-1. 
+4. Remote repository 문법법
+```bash
+# Control remote repos
+git remote add {repo_name} {repo_url} # Add new remote repo
+git remote remove {repo_name} # Remove remote repo
+git remote set-url origin {repo_url} # Set url for remote repo
+git remote -v # Checkout remote repo info.
+# Pull/push
+git pull {repo_name} {branch_name} # Fetch & merge from remote repo. Cannot pull branches with unrelated histories.
+git push {repo_name} {branch_name} # Push local repo to remote repo. Cannot merge barnches with unrelated histories. (Cannot merge in github)
+# Clone remote repo
+```
+
+5. 
