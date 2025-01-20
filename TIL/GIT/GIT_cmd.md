@@ -40,13 +40,26 @@ git clone {repo_url} # Clone remote repo. Remote url is automatically updated.
 ```
 
 3. Revert / Reset 문법
+- 공통 사항 : branch가 하나일 경우에는 문제가 없지만, branch가 많아지면 문제 발생.
+    1. git revert는 해당 버전으로 돌아가도록 새로운 commit을 수행.
+        - 버전을 되돌리면서 무결성/협업 신뢰도를 유지하는 방법.
+    2. git reset은 해당 버전 이후의 기록을 삭제하고 해당 버전으로 돌아감.
+        1. --soft : WD, Staging Area는 그대로.
+        2. --mixed(default) : WD는 그대로.
+        3. --hard : 남기는 기록 없이.
+
 ```bash
 # git revert
-git revert {commit_id1} {commit_id2} ...
-git revert --no-edit {commit_id}
-git revert --no-commit {commit_id}
+git revert {commit_id1} {commit_id2} ... # multiple commits
+git revert --no-edit {commit_id} # commit message is 'Revert {commit_message}'
+git revert --no-commit {commit_id} # commit 없이 staging area에만.
 # git reset, --hard, --soft, --mixed
 git reset [option] {commit_id}
-
 ```
-4. 
+
+4. git reflog를 활용한 복구.
+```bash
+# reflog
+git reflog # reset으로 인해 git log에서 확인 불가능한 id 확인 가능
+git reset --hard {reflog_commit_id} # 해당하는 id로 하드 리셋.
+```
