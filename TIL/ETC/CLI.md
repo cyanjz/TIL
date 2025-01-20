@@ -13,5 +13,3 @@
    7. pwd : print current working directory
    8. ctrl + i : paste
    9. cat + <file name> : Print file contents
-   10. ![img_name](img_url)
-   11. [link_name](link_url)
