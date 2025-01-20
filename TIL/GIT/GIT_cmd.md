@@ -37,6 +37,9 @@ git pull {repo_name} {branch_name} # Fetch & merge from remote repo. Cannot pull
 git push {repo_name} {branch_name} # Push local repo to remote repo. Cannot merge barnches with unrelated histories. (Cannot merge in github)
 # Clone remote repo
 git clone {repo_url} # Clone remote repo. Remote url is automatically updated.
+# Fetch remote repo and reset with hard option -> ignore conflicts
+git fetch origin
+git reset --hard origin/master
 ```
 
 3. Revert / Reset 문법
