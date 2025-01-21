@@ -25,3 +25,16 @@ PEP8은 PYTHON의 코드 작성 일관성을 유지하고 가독성을 높이기
 | break   | for     | not     | class  |
 | continue| global  | pass    | form   |
 | or      |         |         |        |
+
+## Collections
+### Commons
+#### Trailing comma
+- 줄을 바꿔가면서 collection 선언시에는 마지막 요소 뒤에 comma를 붙인다.
+- 한줄로 쓸 때는 사용하지 않는다.
+```python
+a = [
+   1,
+   2,
+   3,
+]
+```
