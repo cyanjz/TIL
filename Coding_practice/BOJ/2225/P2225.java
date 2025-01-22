@@ -9,7 +9,7 @@ public class P2225 {
         int[] dp = new int[N+1];
         dp[0] = 1;
         for (int k = 1; k <= K; k ++) {
-            for (int n = 1; n <= N; n ++){
+            for (int n = 1; n <= N; n ++) {
                 dp[n] = (dp[n] + dp[n-1]) % div;
             }
         }
