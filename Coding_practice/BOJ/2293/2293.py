@@ -1,12 +1,15 @@
 def solve():
-    while coins:
-        coin = coins.pop()
-        for i in range(1, k//coin+1):
-            DP[coin * i] = min(DP.get(coin*i, k), i)
-        for K, V in DP.items():
-            DP[K] = min(V, DP.get(K-coin, k) + 1)
-    print(DP)
-    return
+    n, k = map(int, input().split())
+    coins = [int(input()) for _ in range(n)]
+    coins = list(set(coins))
+    DP = [0] * k
+    for coin in coins:
+        DP[coin] = 1
+    for i in range(k):
+        for coin in coins:
+            if coin <= i:
+                DP[i] += DP[i-coin]
+    return DP[-1]
 
 def input():
     return f.readline().rstrip('\n')
