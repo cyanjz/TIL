@@ -16,7 +16,8 @@ requests.get(URL)
 
 ## RESP methods
 ### resp.json
-- resp를 json 형식으로
+- resp를 json 형식으로 불러온다.
+- python 내에서는 list 형식.
 ```python
 resp.json
 ```

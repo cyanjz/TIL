@@ -43,6 +43,7 @@ test.compareTo("string"); // compares two string lexicographically(alphabetic or
 test.concat(" 6 7 8 9"); // "1 2 3 4 5 6 7 8 9"
 test.join(sep, String1, String2, ...); // String1{sep}String2{sep}...
 test.substring(int start, int end);
+test.indexOf(3); // 4
 ```
 
 # Collections
@@ -84,4 +85,13 @@ public class JavaTest {
         System.out.println(test); // []
     }
 }
+```
+
+## HashMap
+- Python dictionary와 비슷
+```java
+import java.util.HashMap;
+
+Hashmap<String, Integer> map = new HashMap<>(); // key와 value의 data type을 미리 선언.
+map.put("name", 3); // hashmap에 새로운 원소를 넣는 method.
 ```
