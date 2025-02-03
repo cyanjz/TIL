@@ -19,3 +19,5 @@ public class Main {
 - 여기서 bytes에 하나씩 저장되려면 Ascii 형식에 해당하는 character가 들어와야함.
 - 기본적으로 char는 2byte이지만, Ascii 형식은 1byte로 표현 가능하므로, 1byte에 표현된다.
 - 그렇지 않을 경우에는 여러 byte에 걸쳐서 할당된다.
+- 
+[참조-stack over flow "Isn't size of character in java 2 bytes"](https://stackoverflow.com/questions/5078314/isnt-the-size-of-character-in-java-2-bytes)
