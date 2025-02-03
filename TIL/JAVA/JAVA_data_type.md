@@ -45,6 +45,7 @@ test.join(sep, String1, String2, ...); // String1{sep}String2{sep}...
 test.substring(int start, int end);
 test.indexOf(3); // 4
 ```
+- window의 경우에는 줄바꿈에서 \r과 \n이 같이 입력된다.
 
 # Collections
 ## Primitive Array
