@@ -1,17 +1,11 @@
-class ClassDecorator:
-    def __init__(self, func):
-        self.func = func
-    
-    def __call__(self, *args, **kwargs):
-        print('decorator called')
-        print(f'Excuting {self.func.__name__}')
-        return self.func(*args, **kwargs)
-
-@ClassDecorator
-def say_hello():
-    print("hello")
-
-say_hello()
-# decorator called
-# Excuting say_hello
-# hello
+try:
+    x = int(input('Enter a number : '))
+    y = 10/x
+except ValueError as e:
+    print(f'error raised : {e}')
+except ZeroDivisionError as e:
+    print(f'error raised : {e}')
+else:
+    print(f'result : {y}')
+finally:
+    print('program end')
