@@ -13,5 +13,11 @@ public class Main{
         return result;
     }
 
-    private 
+    private static int evalEquation(){
+        return 0;
+    }
+
+    private static char read(){
+        int a = System.in.read();
+    }
 }
