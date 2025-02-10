@@ -5,3 +5,9 @@
 
 ## Python docs
 - 자습서, library reference, language reference 공부.
+
+# Python tips
+```python
+print(f'#{t}', *arr)
+# #1 a b c d e f g
+```
