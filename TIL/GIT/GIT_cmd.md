@@ -41,6 +41,7 @@ git clone {repo_url} # Clone remote repo. Remote url is automatically updated.
 git fetch origin
 git reset --hard origin/master
 ```
+- remote repository를 추가하면 window의 경우 제어판 - 사용자 계정 - 자격 증명 관리자에 새로운 자격 증명이 생성된다.
 
 3. Revert / Reset 문법
 - 공통 사항 : branch가 하나일 경우에는 문제가 없지만, branch가 많아지면 문제 발생.
