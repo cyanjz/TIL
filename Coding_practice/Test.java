@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Main {
+public class Test {
     static byte[] input = new byte[2000003];
     static int bytesRead = 0;
     public static void main(String[] args) throws IOException {
