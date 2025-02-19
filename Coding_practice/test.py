@@ -1,11 +1,9 @@
-def eval_equation(eq):
-    ans = eq[0]
-    pivot = 1
-    print(ans)
-    while pivot+2 <= len(eq):
-        ans = eval(f'{ans}{eq[pivot:pivot+2]}')
-        print(ans)
-        pivot += 2
-    return ans
+import sys
 
-print(eval_equation('3+8*7-9*2'))
+
+sys.stdin = open('in.txt', 'r')
+sys.stdout = open('out.txt', 'w')
+
+print(sys.stdin.readline().rstrip())
+print(sys.stdin.readline())
+print(sys.stdin.readline())
