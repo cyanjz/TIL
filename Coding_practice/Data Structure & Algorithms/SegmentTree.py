@@ -16,6 +16,9 @@
 #   - 2. 벗어나면 바로 return
 #   - 3. query에 node의 범위가 걸치면... 왼쪽과 오른쪽 자식을 재귀적으로 탐색.
 #   - scope 범위가 query에 포함(st[node])/벗어남(0)/걸침(q(left)+q(right) 에 대한 코드 작성.
+#
+# 중요! : segment tree를 형성할 때 최대값 혹은 최솟값으로 설정하여 tree를 만들 수도 있다.
+# 구간에 대한 어떤 정보를 저장해 두는 형식으로 응용할 수 있음을 항상 생각하라!
 
 
 def builder(node, left, right):
@@ -48,18 +51,18 @@ def query(node, s, e, left=0, right=6):
     # query가 scope를 벗어나는 경우.
     if e < left or right < s:
         return 0
-    # scope가 querry내에 있는 경우
+    # scope가 querry 내에 있는 경우.
     if s <= left and right <= e:
         return seg_tree[node]
     mid = (left+right)//2
     return query(2*node, s, e, left, mid) + query(2*node+1, s, e, mid+1, right)
 
 
-arr = [1, 2, 3, 4, 5, 6, 7]
+arr = [1, 2, 3, 4, 5]
 N = len(arr)
-seg_tree = [0] * (4 * N)
+seg_tree = [0] * (2 * N)
 builder(1, 0, N-1)
 # update(1, 0, N-1, 100, 1)
-# print(seg_tree)
+print(seg_tree)
 # update(1, 0, N-1, 100, 4)
 # print(seg_tree)
