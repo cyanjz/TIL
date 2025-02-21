@@ -67,3 +67,9 @@ git reset [option] {commit_id}
 git reflog # reset으로 인해 git log에서 확인 불가능한 id 확인 가능
 git reset --hard {reflog_commit_id} # 해당하는 id로 하드 리셋.
 ```
+
+5. git remote repo를 붙여 넣을 때 사용하는 cmd
+```bash
+git fetch origin
+git reset --hard origin/master
+```

@@ -31,14 +31,41 @@ def solve():
     for i in range(W-1, -1, -1):             # W-2
         for j in range(i+1):
             n = max(i, j) + 1
-            dp[i][j] = min(dp[n][j] + dist1(i, n), dp[i][n] + dist2(j, n))
-            dp[j][i] = min(dp[n][j] + dist1(j, n), dp[j][n] + dist2(i, n))
-        print('#' * N)
-        for row in dp:
-            print(*row)
+            # compare row/col moves
+            row_move1 = dp[n][j] + dist1(i, n)      # 1번 자동차가 움직임
+            col_move1 = dp[i][n] + dist2(j, n)      # 2번 자동차가 움직임
+            row_move2 = dp[n][i] + dist1(j, n)      # 1번 자동차가 움직임
+            col_move2 = dp[j][n] + dist2(i, n)      # 2번 자동차가 움직임
+            if row_move1 > col_move1:
+                trace[i][j] = 2
+                dp[i][j] = col_move1
+            else:
+                trace[i][j] = 1
+                dp[i][j] = row_move1
 
-    for row in dp:
-        print(*row)
+            if row_move2 > col_move2:
+                trace[j][i] = 2
+                dp[j][i] = col_move2
+            else:
+                trace[j][i] = 1
+                dp[j][i] = row_move2
+        # print('#' * N)
+        # for row in dp:
+        #     print(*row)
+        # print('@' * N)
+        # for row in trace:
+        #     print(*row)
+    # for row in dp:
+    #     print(*row)
+    # print ans
+    print(dp[0][0])
+    r = c = 0
+    for i in range(W):
+        print(trace[r][c])
+        if trace[r][c] == 2:
+            c = max(r, c) + 1
+        else:
+            r = max(r, c) + 1
     return
 
 
