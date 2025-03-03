@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 T = int(input())    # bus_route
 for br in range(1, T+1):
     K, N, M = map(int, input().split())
@@ -19,3 +20,14 @@ for br in range(1, T+1):
                 break
 
     print(f"#{br} {min_charge}")
+=======
+import sys
+
+
+sys.stdin = open('in.txt', 'r')
+sys.stdout = open('out.txt', 'w')
+
+print(sys.stdin.readline().rstrip())
+print(sys.stdin.readline())
+print(sys.stdin.readline())
+>>>>>>> bccdbf41e9f9d6013b024f2c9ede23af862bb6fe
