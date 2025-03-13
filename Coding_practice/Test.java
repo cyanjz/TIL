@@ -1,15 +1,29 @@
-import java.io.IOException;
-
-public class Test {
-    static byte[] input = new byte[2000003];
-    static int bytesRead = 0;
-    public static void main(String[] args) throws IOException {
-        bytesRead = System.in.read(input); // 읽어들인 byte 수.
-        int[] counts = new int[26];
-        for (int i = 0; i < bytesRead; i ++) {
-            int c = input[i];
-            if (c == 13 | c == 10) break; // \r이나 \n이 발견되면 종료.
-            System.out.println(c);
-        }
-    }
+public class Test{
+  public static void main(String[] args){
+    Base a =  new Derivate();
+    Derivate b = new Derivate();
+    
+    System.out.println(a.getX() + a.x + b.getX() + b.x);
+    System.out.println(a.x);
+    System.out.println(a.getX());
+    System.out.println(b.x);
+    System.out.println(b.getX());
+  }
+}
+ 
+ 
+class Base{
+  int x = 3;
+ 
+  int getX(){
+     return x * 2; 
+  }
+}
+ 
+class Derivate extends Base{
+  int x = 7;
+  
+  int getX(){
+     return x * 3;
+  }
 }
