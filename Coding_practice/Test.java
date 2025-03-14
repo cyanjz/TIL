@@ -1,13 +1,11 @@
 public class Test{
   public static void main(String[] args){
-    Base a =  new Derivate();
-    Derivate b = new Derivate();
-    
-    System.out.println(a.getX() + a.x + b.getX() + b.x);
-    System.out.println(a.x);
-    System.out.println(a.getX());
-    System.out.println(b.x);
-    System.out.println(b.getX());
+    int[][] test = new int[3][3];
+    for (int r = 0; r < 3; r ++) {
+      for (int c = 0; c < 3; c ++) {
+        System.out.println(test[r][c]);
+      }
+    }
   }
 }
  

@@ -36,11 +36,6 @@ class Main {
             }
             // 2. solve 함수 호출.
             solve();
-            // printArr(arr);
-            // System.out.println(dfs(1, 2, arr));
-            // printArr(arr);
-            // System.out.println(dfs(2, 2, arr));
-            // printArr(arr);
 
             // 3. 출력.
             System.out.printf("#%d %d\n", t+1, totalBlocks - ans);
@@ -48,7 +43,6 @@ class Main {
     }
 
     private static void printArr(int[][] arrPrint) {
-        System.out.println("#####################");
         for (int i = 0; i < H; i ++) {
             for (int j = 0; j < W; j ++) {
                 System.out.print(arrPrint[i][j]);
@@ -58,7 +52,11 @@ class Main {
     }
 
     private static void solve() {
-        callDfs(0, 0);
+        // 3. 재귀 호출?
+        // 이거 어케 해요?
+        // N만큼 순회하면서, 각각의 case에서 값을 계산해줘야함.
+        // N만큼 순회하면
+        callDfs(0, 0, arr);
     }
 
     // permutation을 구해야함. -> 재귀로 해결하자.
@@ -73,67 +71,59 @@ class Main {
     //  3) map : 현재 플레이맵의 상태.
     // 3. 재귀 호출
     // 1) 0 ~ W의 위치에 구슬을 떨어뜨려야함.
-    private static void callDfs(int depth, int cnt) {
+    private static void callDfs(int depth, int cnt, int[][] curArr) {
         if (depth == N) {
             // System.out.println("depth end reached");
             // System.out.println(cnt);
             ans = Math.max(cnt, ans);
         }
-
         else if (cnt == totalBlocks) {
             ans = totalBlocks;
         }
-
         else {
-            // 현재 상태 백업.
-            int[][] backup = new int[H][W];
-            for (int i = 0; i < H; i ++) {
-                for (int j = 0; j < W; j ++) {
-                    backup[i][j] = arr[i][j];
-                }
-            }
-            // 재귀 호출
+            int[][] temp = new int[H][W];
             for (int c = 0; c < W; c ++) {
                 if (ans == totalBlocks) {
                     return;
                 }
                 // 3-1. 구슬이 c에 떨어지면 어디까지 떨어지는지 확인.
                 int r = 0;
-                while (r < H && arr[r][c] == 0) {
+                while (r < H && curArr[r][c] == 0) {
                     r++;
                 }
                 if (r == H) {
                     continue;
                 }
 
-                // 3-2. dfs
-                int breaks = dfs(r, c, arr);
-
-                // 3-3. call recur function
-                callDfs(depth+1, cnt+breaks);
-
-                // 3-4. deepcopy of backup & initialize visited
+                // 3-2. deepcopy of arr & initialize visited
+                int[][] visited = new int[H][W];
                 for (int i = 0; i < H; i ++) {
                     for (int j = 0; j < W; j ++) {
-                        arr[i][j] = backup[i][j];
+                        temp[i][j] = curArr[i][j];
                     }
                 }
+
+                // 3-3. dfs
+                int breaks = dfs(r, c, visited, temp);
+
+                // 3-4. call recur function
+                callDfs(depth+1, cnt+breaks, temp);
             }
         }
     }
 
-    private static int dfs(int r, int c, int[][] temp) {
+    private static int dfs(int r, int c, int[][] visited, int[][] temp) {
         // dfs1. dfs 변수 선언
-        Stack<int[]> stack = new Stack<>();
-        stack.push(new int[] { r, c, temp[r][c]});
-        temp[r][c] = 0;
+        Stack<Integer[]> stack = new Stack<>();
+        stack.push(new Integer[] { r, c });
         int cnt = 0;
 
         // dfs2. run dfs
         while (!stack.isEmpty()) {
-            int[] cur_loc = stack.pop(); // pop
+            Integer[] cur_loc = stack.pop(); // pop
             // System.out.printf("%d %d %d %d", cur_loc[0], cur_loc[1], H, W);
-            int dist = cur_loc[2]; // 현재 칸의 숫자, 탐색할 범위
+            int dist = temp[cur_loc[0]][cur_loc[1]]; // 현재 칸의 숫자, 탐색할 범위
+            temp[cur_loc[0]][cur_loc[1]] = 0;
             cnt += 1;
             for (int d = 1; d < dist; d++) { // dist 순회
                 for (int i = 0; i < 4; i++) { // dir
@@ -144,8 +134,10 @@ class Main {
                         if (temp[nr][nc] == 0) { // 인접한 칸이 0이면 탐색 안함.
                             continue;
                         }
-                        stack.push(new int[] { nr, nc, temp[nr][nc]});
-                        temp[nr][nc] = 0;
+                        if (visited[nr][nc] != 1) { // 방문한적 없으면 push
+                            visited[nr][nc] = 1;
+                            stack.push(new Integer[] { nr, nc });
+                        }
                     }
                 }
             }
