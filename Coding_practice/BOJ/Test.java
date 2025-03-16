@@ -1,8 +1,16 @@
-public class test {
-    static int[] q = new int[2];
-    static { 
-        q[0] = 100; // Now this is inside a valid static block
-    }
-    public static void main(String[] args) { 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.Buffer;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+
+class Main {
+    public static void main(String[] args) throws IOException {
+        System.setIn(new FileInputStream("input.txt"));
+        System.setOut(new PrintStream(new FileOutputStream("output.txt")));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(br.readLine());
     }
 }
