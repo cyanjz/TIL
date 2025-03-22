@@ -36,17 +36,13 @@ class Main {
             }
             // 2. solve 함수 호출.
             solve();
-            // printArr(arr);
-            // System.out.println(dfs(1, 2, arr));
-            // printArr(arr);
-            // System.out.println(dfs(2, 2, arr));
-            // printArr(arr);
 
             // 3. 출력.
             System.out.printf("#%d %d\n", t+1, totalBlocks - ans);
         }
     }
 
+    // 디버깅용
     private static void printArr(int[][] arrPrint) {
         System.out.println("#####################");
         for (int i = 0; i < H; i ++) {
@@ -66,33 +62,34 @@ class Main {
     //  1) depth == N : N번의 공을 모두 떨어뜨린 경우
     //  2) cnt == totalBlock : 블럭이 남아있지 않은 경우
     //  3) 블럭이 안부서진 경우
-    //  4) 
     // 2. 전달할 값
     //  1) depth : 현재까지 굴린 구슬의 수
     //  2) cnt : 현재까지 부순 블럭의 수
-    //  3) map : 현재 플레이맵의 상태.
     // 3. 재귀 호출
-    // 1) 0 ~ W의 위치에 구슬을 떨어뜨려야함.
+    //  0) 재귀 호출이 끝난 후에 배열을 복구하기 위해 backup 형성
+    //  1) c 열에 구슬을 떨어뜨렸을 때 어디까지 떨어지는지 확인.
+    //  2) dfs를 통해 블럭을 부수고, 떨어뜨리기
+    //  3) 재귀 호출하기. depth + 1, cnt + breaks
+    //  4) 재귀 호출이 끝났으니 백업을 사용해서 원래대로 되돌리기.
     private static void callDfs(int depth, int cnt) {
+        // 1-1. 종료조건 : N개의 공을 모두 떨어뜨림.
         if (depth == N) {
-            // System.out.println("depth end reached");
-            // System.out.println(cnt);
             ans = Math.max(cnt, ans);
         }
 
+        // 1-2. 종료조건: 더 이상 블록이 없으면 재귀 호출할 필요가 없다.
         else if (cnt == totalBlocks) {
             ans = totalBlocks;
         }
 
         else {
-            // 현재 상태 백업.
+            // 3-0. 현재 상태 백업.
             int[][] backup = new int[H][W];
             for (int i = 0; i < H; i ++) {
                 for (int j = 0; j < W; j ++) {
                     backup[i][j] = arr[i][j];
                 }
             }
-            // 재귀 호출
             for (int c = 0; c < W; c ++) {
                 if (ans == totalBlocks) {
                     return;
@@ -102,7 +99,9 @@ class Main {
                 while (r < H && arr[r][c] == 0) {
                     r++;
                 }
+                // 1-3. 종료조건 : 블럭이 안 부서졌으면 탐색 더 안함.
                 if (r == H) {
+                    ans = Math.max(cnt, ans);
                     continue;
                 }
 
@@ -112,7 +111,7 @@ class Main {
                 // 3-3. call recur function
                 callDfs(depth+1, cnt+breaks);
 
-                // 3-4. deepcopy of backup & initialize visited
+                // 3-4. deepcopy of backup
                 for (int i = 0; i < H; i ++) {
                     for (int j = 0; j < W; j ++) {
                         arr[i][j] = backup[i][j];
@@ -127,12 +126,11 @@ class Main {
         Stack<int[]> stack = new Stack<>();
         stack.push(new int[] { r, c, temp[r][c]});
         temp[r][c] = 0;
-        int cnt = 0;
+        int cnt = 0;                // 이번 블록 부수기에서 깨진 블록의 수를 추적할 변수.
 
         // dfs2. run dfs
         while (!stack.isEmpty()) {
             int[] cur_loc = stack.pop(); // pop
-            // System.out.printf("%d %d %d %d", cur_loc[0], cur_loc[1], H, W);
             int dist = cur_loc[2]; // 현재 칸의 숫자, 탐색할 범위
             cnt += 1;
             for (int d = 1; d < dist; d++) { // dist 순회
@@ -151,7 +149,6 @@ class Main {
             }
         }
         
-
         // dfs3. 블록 부쉈으니 떨어뜨리기.
         for (int cw = 0; cw < W; cw++) {
             int top = H-1;

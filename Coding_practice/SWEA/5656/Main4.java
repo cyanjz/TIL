@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 // 어떤식으로 입력을 받는게 좋을까?
 // N, M, W는 static 변수로 선언.
 // static 영역에 최소한의 할당을 위해서 배열은 그냥 읽자.
-class Main3 {
+class Main4 {
     static int N, W, H, ans, totalBlocks;
     static int[][] ds = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
     static int[] path = new int[4];
@@ -42,12 +42,17 @@ class Main3 {
             }
 
             // 2-0 디버깅용
-            // int[][] dump = new int[H][W];
+            // printArr(arr);
+            // dump = new int[H][W];
             // copyArr(dump, arr);
-            // System.out.println(dfs(1, 2, dump));
             // printArr(dump);
-            // System.out.println(dfs(2, 2, dump));
+            // explode(1, 2);
+            // dropBlocks();
             // printArr(dump);
+            // explode(2, 2);
+            // dropBlocks();
+            // printArr(dump);
+            // System.err.println(cnt);
 
             // 3. ans 초기화하고 solve() 수행
             ans = 0;
@@ -110,10 +115,10 @@ class Main3 {
         int dist = dump[r][c];
         dump[r][c] = 0;
         cnt++;
-        for (int d = 0; d < dist; d ++) {
+        for (int d = 1; d < dist; d ++) {
             for (int i = 0; i < 4; i ++) {
-                int nr = ds[i][0];
-                int nc = ds[i][1];
+                int nr = r + ds[i][0]*d;
+                int nc = c + ds[i][1]*d;
                 if (nr < 0 || nr > H-1 || nc < 0 || nc > W-1) {
                     continue;
                 }
