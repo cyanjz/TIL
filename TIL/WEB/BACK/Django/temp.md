@@ -12,3 +12,11 @@ USE_I18N = True
 USE_TZ = False
     # False로 설정하면 TIME_ZONE 변수에 할당된 TZ를 사용하지 않는다.
     # 즉, 로컬 시간대를 사용하여 DB 관리등을 수행한다.
+
+    1. urls.py에 views를 import 할때 어떤식으로 해주는게 좋나?
+import book_main_page.views
+이게 좋아보이는데?
+
+2. views.py에 name 인자를 전달해야 html에서 a link를 작성할 때 참조 가능한 것 같다.
+이건 html의 a link를 클릭하면 views의 함수를 호출하는 걸로 이해해도 괜찮은지?
+그러니까 urls.py -> views -> response를 다시 밟는 과정.
