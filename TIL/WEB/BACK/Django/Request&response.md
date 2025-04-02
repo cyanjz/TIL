@@ -43,3 +43,8 @@ HTML에서 보낸 요청은 특정 views.py의 함수를 호출한다.
 이때 dictionary의 key는 input tag의 name이고, value는 사용자의 입력값이다.
 
 request를 통해 context dictionary를 만들어 render 함수에 전달할 수도 있다.
+
+
+## ETC
+1. 유저 authenticated 여부
+`request.user.is_authenticated`

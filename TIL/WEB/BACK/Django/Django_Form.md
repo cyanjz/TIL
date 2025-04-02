@@ -120,10 +120,15 @@ form = ArticleForm(request.POST, instance = article)
 html에서 rendering 될 label tag의 이름을 지정.
 
 ### 2. widget
+[Django-widget](https://docs.djangoproject.com/en/5.1/ref/forms/widgets/)
+
 html에서 rendering 될 input의 양식을 지정할 수 있다.
 
 class 변수로 I. forms와 같이 field를 정의하고, 내부 속성을 변경한다.
 
+필드를 정의하고 내부에서 widget을 사용할 때는 forms의 method를 사용한다.
+
+atttr 값은 dict로 준다.
 ```python
 class ArticleForm(forms.ModelForm):
     title = forms.Charfield(
@@ -150,6 +155,20 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = '__all__'
+```
+
+```python
+from django.forms import ModelForm, Textarea
+from myapp.models import Author
+
+
+class AuthorForm(ModelForm):
+    class Meta:
+        model = Author
+        fields = ["name", "title", "birth_date"]
+        widgets = {
+            "name": Textarea(attrs={"cols": 80, "rows": 20}),
+        }
 ```
 
 ## V. form의 필드를 수동으로 rednering

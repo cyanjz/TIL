@@ -19,3 +19,8 @@ def create(request):
     }
     return render(request, 'articles/create.html', context)
 ```
+
+## decorators
+`@require_http_methods`
+`@require_safe`
+
