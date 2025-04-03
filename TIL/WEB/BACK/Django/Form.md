@@ -78,6 +78,57 @@ class ArticleForm(forms.ModelForm):
         fields = ('content',)
 ```
 
+
+### 1. create
+```python
+from .forms import ArticleFrom
+
+
+def create(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('articles:index')
+    else:
+        form = ArticleForm()
+    context = {
+        'form' : form,
+    }
+    return render(request, 'create/create.html', context)
+```
+
+### 2. update
+```python
+from .forms import ArticleFrom
+
+
+def update(request, pk):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, instance=Article.objects.get(pk=pk))
+        if form.is_valid():
+            article = form.save()
+            return redirect('articles:detail', article.pk)
+    else:
+        form = ArticleForm(instance=Article.objects.get(pk=pk))
+    context = {
+        'form' : form,
+    }
+    return render(request, 'create/create.html', context)
+```
+
+### 3. delete
+```python
+from .forms import ArticleFrom
+
+
+def delete(request, pk):
+    article = Article.objects.get(pk=pk)
+    article.delete()
+    return redirect('articles:index')
+```
+
+
 ## III. instance methods
 ### 1. .is_valid()
 입력을 views.py의 함수에서 다음과 같은 형식으로 받아올 수 있다.
@@ -171,7 +222,7 @@ class AuthorForm(ModelForm):
         }
 ```
 
-## V. form의 필드를 수동으로 rednering
+## V. form의 필드를 수동으로 rendering
 아래와 같이 form의 속성에 접근하여 직접 rendering할 수도 있다.
 
 `title.non_field_errors` : 필드 값이 없을 때 나오는 error
