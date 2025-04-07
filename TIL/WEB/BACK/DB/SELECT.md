@@ -145,5 +145,28 @@ HAVING
 #### 2. 집계 함수
 집계 함수는 필드에 제약 조건이 없다. `SELECT`나 `GROUP BY`에 있든 없든 정상적으로 동작한다.
 
-## 참조 - SELECT 문 관련 실행 순서
+## 참조
+### SELECT 문 관련 실행 순서
 ![alt text](image.png)
+
+
+### SQL SELECT 심화
+#### 서브 쿼리
+```sql
+SELECT * FROM users WHERE age >= 30 AND balance > (SELECT AVG(balance) FROM users WHERE age >= 30);
+```
+
+
+#### CTEs, Common Table Expressions
+
+```SQL
+WITH avg_bal AS (
+  SELECT AVG(balance) AS avg_balance
+  FROM users
+  WHERE age >= 30
+)
+SELECT *
+FROM users
+WHERE age >= 30
+  AND balance > (SELECT avg_balance FROM avg_bal);
+```
