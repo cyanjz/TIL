@@ -4,19 +4,24 @@ from collections import deque
 def rotate_all(l):
     # 봐야할 scope는 0~2**(L+1).
     # 근데 l==N이면 안됨.
-    if l == N:
+    if l == 0:
         return
     else:
         # 시작 위치는... (0, 0), (2**(l+1), 0), ... (2**(N-l), 0) () 2**(l+1)만큼 stride.
-        stride = 2**(l+1)
-        for r in range(0, arr_size, stride):
-            for c in range(0, arr_size, stride):
-                rotate_local(r, c, l)
+        for le in range(1, l+1):
+            stride = 2**le
+            for r in range(0, arr_size, stride):
+                for c in range(0, arr_size, stride):
+                    rotate_local1(r, c, le)
+                    # rotate_local2(r, c, stride)
+        # print('#' * arr_size)
+        # for row in arr:
+        #     print(*row)
         return
 
 
-def rotate_local(r, c, l):
-    size = 2**l
+def rotate_local1(r, c, l):
+    size = 2**(l-1)
     # 나중에 불러오기 위한 변수.
     # temp = [row[c:c+size] for row in arr[r:r+size]]
 
@@ -31,10 +36,17 @@ def rotate_local(r, c, l):
             cr, cc = r + i, c + j
             # A B C D = D A B C
             arr[cr][cc], arr[cr][cc+size], arr[cr+size][cc+size], arr[cr+size][cc] = arr[cr+size][cc], arr[cr][cc], arr[cr][cc+size], arr[cr+size][cc+size]
-    # print('#' * arr_size)
-    # for row in arr:
-    #     print(*row)
     return
+
+
+# def rotate_local2(r, c, st):
+#     iter_range = st//2
+#     k = st-1
+#     for i in range(iter_range):
+#         for j in range(iter_range):
+#             cr, cc = r + i, c + j
+#             arr[cr][cc], arr[cc][k-cr], arr[k-cr][k-cc], arr[k-cc][cr] = arr[k-cc][cr], arr[cr][cc], arr[cc][k-cr], arr[k-cr][k-cc]
+#     return
 
 
 def melt():
@@ -50,7 +62,7 @@ def melt():
                 does_melt[r][c] = 1
     for r in range(arr_size):
         for c in range(arr_size):
-            arr[r][c] -= does_melt[r][c]
+            arr[r][c] = max(arr[r][c] - does_melt[r][c], 0)
     # print('#' * arr_size)
     # for row in arr:
     #     print(*row)
@@ -73,6 +85,8 @@ def get_max_chunk():
                 chunk_size += 1
                 for dr, dc in ds:
                     nr, nc = cr + dr, cc + dc
+                    if not (0 <= nr < arr_size and 0 <= nc < arr_size):
+                        continue
                     if visited[nr][nc] or arr[nr][nc] == 0:
                         continue
                     visited[nr][nc] = 1
@@ -94,6 +108,7 @@ N, Q = map(int, input().split())
 arr_size = 2**N
 arr = [list(map(int, input().split())) for _ in range(arr_size)]
 Ls = list(map(int, input().split()))
+# print(sum(sum(row) for row in arr))
 max_chunk, total_ice = solve()
 print(total_ice)
 print(max_chunk)
