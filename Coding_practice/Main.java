@@ -1,19 +1,22 @@
-public class Main {
-    public static void main(String[] args) {
-        Person person1 = new Person("a");
-        Person person2 = new Person("b");
-        person1.name = "a";
-        person2.name = "b";
-        System.out.println(person1.name);
-        System.out.println(person2.name);
-    }
+class Parent {
+  // 부모 클래스의 생성자
+  Parent() {
+      System.out.println("Parent class constructor called");
+  }
 }
-class Person {
-    public String name;
-    public Person(String val) {
-        name = val;
-    }
-    public void print() {
-        System.out.println(name);
-    }
+
+class Child extends Parent {
+  // 자식 클래스의 생성자
+  Child() {
+      // 부모 클래스의 생성자가 자동으로 먼저 호출됩니다.
+      System.out.println("Child class constructor called");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+      // Child 클래스의 객체를 생성하면
+      // 부모 클래스 생성자 -> 자식 클래스 생성자 순으로 호출됩니다.
+      Child child = new Child();
+  }
 }

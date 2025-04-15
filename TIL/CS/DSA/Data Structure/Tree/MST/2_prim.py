@@ -38,6 +38,7 @@ def prim2():
         if MST[node]:
             continue
         MST[node] = 1
+        cnt += 1
         min_cost += cost
         for next_cost, next_node in adj_list[node]:
             # 조건 하나 더 추가 -> 이미 최단 거리
