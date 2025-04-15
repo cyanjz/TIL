@@ -21,6 +21,19 @@ def create(request):
 ```
 
 ## decorators
-`@require_http_methods`
-`@require_safe`
+### http response
+
+HTTP 요청의 타입이 지정된 타입과 다르면 405 error를 응답하도록 하는 decorator.
+
+`@require_http_methods([...])` : list 내부의 method만 허용
+
+`@require_safe` : GET, HEAD만 허용 (GET 대신 권장)
+
+`@require_get` : GET만 허용 (비권장)
+
+`@require_post` : POST만 허용
+
+### login
+
+`@require_login` : 로그인이 안되어 있으면 허용하지 않음.
 

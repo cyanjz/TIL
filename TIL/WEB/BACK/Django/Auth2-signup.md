@@ -12,7 +12,7 @@
 왜냐하면 UserCreationForm과 UserChangeForm은 둘 다 auth.user를 사용해서 업데이트를 수행하려 하기 때문에 재정의된 User model, accounts.User를 바탕으로 DB 조작을 수행하지 않기 때문이다.
 
 ```python
-from django.contrib.auth.forms import UserCreationForm, UserChageForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from .models import User
 
