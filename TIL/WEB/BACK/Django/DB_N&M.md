@@ -11,6 +11,8 @@ Database에서 중개 테이블을 생성하여 다대다 관계를 형성하는
 {relation}_{model_A}s = models.ManyToManyField({model_A},
                                                 related_name='{relation}_{model_B}s',
                                                 through='{relation_table}',)
+# 참조하는 모델이 자기 자신이라면 'self'를 첫번째 인자로 준다.
+
 
 # 중개 테이블에 정보를 추가해서 through 인자를 사용하여 ManyToManyField를 정의한 경우
 # throuh_defaults를 사용해서 add를 호출해야한다.
