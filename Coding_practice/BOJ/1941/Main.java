@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.ArrayDeque;
 
 
@@ -21,11 +20,11 @@ public class Main {
 
   static void solve(int[][] selected, int depth, int cnt, int idx) {
     if (depth == 7) {
-      if (cnt == 4 && check(selected)) {
+      if (cnt >= 4 && check(selected)) {
         ans++;
       }
     }
-    if (7-depth < 4-cnt) {
+    if (depth-cnt > 3) {
       return;
     }
     else {
@@ -56,20 +55,18 @@ public class Main {
   }
 
   static boolean check(int[][] selected) {
-    int cnt1 = 0;
-    int cnt2 = 0;
+    int cnt = 0;
     ArrayDeque<int[]> q = new ArrayDeque<>();
     int[][] visited = new int[5][5];
-    q.add(getidx(selected));
+    int[] start = getidx(selected);
+    visited[start[0]][start[1]] = 1;
+    q.add(start);
 
     while (!q.isEmpty()) {
       int[] coordinate = q.pop();
       int cr = coordinate[0];
       int cc = coordinate[1];
-      cnt1++;
-      if (classroom[cr].charAt(cc) == 'S') {
-        cnt2++;
-      }
+      cnt++;
       for (int i = 0; i < 4; i ++) {
         int dr = ds[2*i];
         int dc = ds[2*i+1];
@@ -80,12 +77,10 @@ public class Main {
             continue;
           }
           q.add(new int[] {nr, nc});
+          visited[nr][nc] = 1;
         }
       }
     }
-    if (cnt1 == 7 && cnt2 == 4) {
-      return true;
-    }
-    return false;
+    return cnt == 7;
   }
 }
