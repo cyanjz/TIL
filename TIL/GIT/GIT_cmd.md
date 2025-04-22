@@ -1,4 +1,13 @@
-1. 기초 문법
+# GIT cmd
+
+## 목차
+#### I. 기초 문법
+#### II. Remote repository 문법
+#### III. revert / reset / restore
+#### IV. git reflog
+#### V. remote repo 충돌 시 강제로 덮어쓰기
+
+## I. 기초 문법
 ```bash
 # Initialize git. WD is tracked by git after initialization.
 git init
@@ -25,7 +34,7 @@ git restore --staged {file_name} # Undo modification from staging area
 git rm --cached # Remove new files from stating area
 ```
 
-2. Remote repository 문법
+## II. Remote repository 문법
 ```bash
 # Control remote repos
 git remote add {repo_name} {repo_url} # Add new remote repo
@@ -43,7 +52,7 @@ git reset --hard origin/master
 ```
 - remote repository를 추가하면 window의 경우 제어판 - 사용자 계정 - 자격 증명 관리자에 새로운 자격 증명이 생성된다.
 
-3. Revert / Reset 문법
+## III. revert / reset / restore
 - 공통 사항 : branch가 하나일 경우에는 문제가 없지만, branch가 많아지면 문제 발생.
     1. git revert는 해당 버전으로 돌아가도록 새로운 commit을 수행.
         - 버전을 되돌리면서 무결성/협업 신뢰도를 유지하는 방법.
@@ -61,14 +70,20 @@ git revert --no-commit {commit_id} # commit 없이 staging area에만.
 git reset [option] {commit_id}
 ```
 
-4. git reflog를 활용한 복구.
+참조 - staged된 파일을 내리는 방법
+```bash
+git restore --staged .
+```
+
+
+## IV. git reflog를 활용한 복구.
 ```bash
 # reflog
 git reflog # reset으로 인해 git log에서 확인 불가능한 id 확인 가능
 git reset --hard {reflog_commit_id} # 해당하는 id로 하드 리셋.
 ```
 
-5. git remote repo를 붙여 넣을 때 사용하는 cmd
+## V. git remote repo를 붙여 넣을 때 사용하는 cmd
 ```bash
 git fetch origin
 git reset --hard origin/master
