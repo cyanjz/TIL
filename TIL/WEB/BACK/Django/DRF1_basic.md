@@ -112,7 +112,7 @@ rest_framework.status의 HTTP 응답을 넣어준다.
 
 
  ```python
- from rest_framework.response import Response
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 
@@ -163,7 +163,4 @@ def article_detail(request, article_pk):
             return Response(serialzer.data)
         return Response(serialzer.errors, status=status.HTTP_400_BAD_REQUEST)
  ```
-
-
- ## 개념
  
