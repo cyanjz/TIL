@@ -1,9 +1,26 @@
 # DRF2 - N:1
 rest_framework를 사용하여 N:1 관계를 어떻게 응답하고, 저장하는지에 대한 내용.
 
+**핵심은 참조/역참조 필드를 serializer를 사용하여 overriding 하기!**
+
+```python
+class ArticleListSerializer(serializers.ModelSerializer):
+    class CommentDetailSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Comment
+            fields = ('id', 'content', )
+    comment_set = CommentDetailSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'content', )
+```
+
+```plaintext
 Comment -> Referencing -> Article
 
 Article -> Reverse referencing -> Comment
+```
 
 <br/>
 <br/>
@@ -30,16 +47,18 @@ class CommentSerializer(serializers.ModelSerializer):
 
 ### 2. views.py
 ```python
+# CREATE comment
 @api_view(['POST'])
-def comment_list(request, article_pk):
+def comment_create(request, article_pk):
+    # 어떤 게시글에 작성되는 것인지 확인.
     article = Article.objects.get(pk=article_pk)
-    if request.method == 'POST':
-        serializer = CommentSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            # .save에 article=article 형태로 필드를 지정할 수 있다.
-            # 다른 필드들에 대해서도 수행 가능.
-            serializer.save(article=article)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # 사용자가 보낸 댓글 데이터를 활용.
+    serializer = CommentSerializer(data=request.data)
+    # 유효성 검사
+    if serializer.is_valid(raise_exception=True):
+        # 추가 데이터를 save 메서드의 인자로 작성.
+        serializer.save(article=article)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 ```
 
 <br/>
@@ -66,11 +85,18 @@ class CommentSeiralizer(serializers.ModelSerializer):
 
 ### 2. views.py
 ```python
-@api_view(['GET'])
-def article_list(request):
-    articles = Article.objects.all()
-    serializer = ArticleListSerializer(articles, many=True)
-    return Response(serializer.data)
+# CREATE comment
+@api_view(['POST'])
+def comment_create(request, article_pk):
+    # 어떤 게시글에 작성되는 것인지 확인.
+    article = Article.objects.get(pk=article_pk)
+    # 사용자가 보낸 댓글 데이터를 활용.
+    serializer = CommentSerializer(data=request.data)
+    # 유효성 검사
+    if serializer.is_valid(raise_exception=True):
+        # 추가 데이터를 save 메서드의 인자로 작성.
+        serializer.save(article=article)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 ```
 
 <br/>
