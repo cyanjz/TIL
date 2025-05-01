@@ -84,20 +84,7 @@ class CommentSeiralizer(serializers.ModelSerializer):
 ```
 
 ### 2. views.py
-```python
-# CREATE comment
-@api_view(['POST'])
-def comment_create(request, article_pk):
-    # 어떤 게시글에 작성되는 것인지 확인.
-    article = Article.objects.get(pk=article_pk)
-    # 사용자가 보낸 댓글 데이터를 활용.
-    serializer = CommentSerializer(data=request.data)
-    # 유효성 검사
-    if serializer.is_valid(raise_exception=True):
-        # 추가 데이터를 save 메서드의 인자로 작성.
-        serializer.save(article=article)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-```
+- 특별한 사항 없음.
 
 <br/>
 <br/>
@@ -131,7 +118,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
 
 ```python
 def ...(request, ...):
-    article = article.objects.annotate(field_name=Agg_func(<역참조 매니저 이름>)).get(pk=article_pk)
+    article = article.objects.annotate(field_name=Agg_func(<대상 모델명>)).get(pk=article_pk)
 ```
 
 ### 2. serializers.py
