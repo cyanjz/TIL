@@ -34,3 +34,17 @@ from .models import TableName
 
 admin.site.register(TableName)
 ```
+
+## User 추가 필드에 대한 admin 접근 허용
+아래와 같이 `BaseUserAdmin`을 상속 받은 `CustomUserAdmin`을 정의하고, register에 두 번째 인자로 넣어준다.
+```python
+class CustomUserAdmin(BaseUserAdmin):
+    filter_horizontal = ('subscription',)
+    
+    fieldsets = BaseUserAdmin.fieldsets + (
+        ('Subscriptions', {'fields': ('subscription',)}),
+    )
+
+admin.site.register(User, CustomUserAdmin)
+
+```

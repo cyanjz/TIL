@@ -3,9 +3,19 @@ Django에서 외래 키, Foreign key를 작성하는 방법.
 
 ## 1. Models.py
 외래키의 이름은 참조할 CLASS의 이름 소문자로 작성한다.
+
+단, User model을 참조하는 필드의 경우 settings.AUTH_USER_MODEL을 사용한다. `get_user_model()`은 models.py를 제외한 파일에서 user model을 참조할 때 사용하고 settings.AUTH_USER_MODEL은 models.py에서만 사용한다.
+
+| 항목             | `get_user_model()`                   | `settings.AUTH_USER_MODEL`       |
+|------------------|--------------------------------------|----------------------------------|
+| 반환값           | User 객체 (클래스)                   | 문자열 (예: `'myapp.CustomUser'`) |
+| 사용처           | `models.py` **제외** 모든 곳         | `models.py` 내부에서 사용         |
+
+
 ```python
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 ```
 - 인자 분석
     - `Article` : 참조할 모델 클래스.
