@@ -1,16 +1,33 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.Buffer;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
+class Parent {
+    int x = 100;
+    Parent() {
+        this(500);
+    }
+    Parent(int x) {
+        this.x=x;
+    }
+    int getX() {
+        return x;
+    }
+}
 
-class Main {
-    public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("input.txt"));
-        System.setOut(new PrintStream(new FileOutputStream("output.txt")));
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(br.readLine());
+class Child extends Parent {
+    int x = 4000;
+    Child() {
+        this(5000);
+    }
+    Child(int x) {
+        this.x=x;
+    }
+    int getX() {
+        return x;
+    }
+}
+
+
+public class Test {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        System.out.println(obj.getX());
     }
 }
